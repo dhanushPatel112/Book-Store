@@ -54,7 +54,7 @@ app.use("/api", orderRoutes);
 const port = process.env.PORT || 8000;
 
 if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('../client/build'))
+  app.use(express.static('client/build'))
 }
 
 app.listen(port, () => {
