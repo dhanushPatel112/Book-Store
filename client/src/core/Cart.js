@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Layout from "./Layout"
 import Card from "./Card"
-import { getCart, removeItem } from "./cartHelpers"
+import { getCart } from "./cartHelpers"
 import { Link } from "react-router-dom"
 import Checkout from "./Checkout"
 
