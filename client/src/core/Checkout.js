@@ -31,7 +31,6 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
                 console.log(data.error)
                 setData({ ...data, error: data.error })
             } else {
-                console.log(data)
                 setData({ clientToken: data.clientToken })
             }
         })
@@ -71,15 +70,7 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
         let getNonce = data.instance
             .requestPaymentMethod()
             .then((data) => {
-                // console.log(data)
                 nonce = data.nonce
-                // once you have nonce (card type, card number) send nonce as 'paymentMethodNonce'
-                // and also total to be charged
-                // console.log(
-                //     "send nonce and total to process: ",
-                //     nonce,
-                //     getTotal(products)
-                // )
                 const paymentData = {
                     paymentMethodNonce: nonce,
                     amount: getTotal(products),
@@ -87,10 +78,6 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
 
                 processPayment(userId, token, paymentData)
                     .then((response) => {
-                        // console.log(response)
-                        // setData({ ...data, success: response.success })
-                        // empty cart
-                        // create order
 
                         const createOrderData = {
                             products: products,
@@ -113,17 +100,16 @@ const Checkout = ({ products, setRun = (f) => f, run = undefined }) => {
                                 })
                             })
                             .catch((error) => {
-                                console.log(error)
+                                console.error(error)
                                 setData({ loading: false })
                             })
                     })
                     .catch((error) => {
-                        console.log(error)
+                        console.error(error)
                         setData({ loading: false })
                     })
             })
             .catch((error) => {
-                // console.log("dropin error: ", error)
                 setData({ ...data, error: error.message })
             })
     }
